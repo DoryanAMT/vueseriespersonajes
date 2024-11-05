@@ -34,10 +34,11 @@
             >
               Dropdown link
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+
+            <ul class="dropdown-menu" >
+              <li v-for="serie in series" :key="serie" class="menu-item">
+                <router-link class="dropdown-item" :to="'/detailsserie/'+serie.idSerie">{{serie.nombre}}</router-link>
+              </li>
             </ul>
           </li>
         </ul>
@@ -47,7 +48,23 @@
 </template>
 
 <script>
+import ServiceComponent from './../services/ServiceSeries'
+const service = new ServiceComponent();
+
 export default {
   name: "MenuComponent",
+  data(){
+    return{
+      series: []
+    }
+  },
+  mounted(){
+    service.getSeries().then(result => {
+      this.series = result;
+      console.log(this.series)
+
+    })
+    
+  }
 };
 </script>
