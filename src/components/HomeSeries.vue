@@ -7,11 +7,11 @@
         <div class="card-body">
           <h5 class="card-title">{{serie.nombre}}</h5>
           <p class="card-text">
-            {{serie.puntuacion}}
+            IMDB: {{serie.puntuacion}}
           </p>
-          <a href="#" class="btn btn-primary w-100">Go somewhere</a>
+          <router-link :to="'/personajesserie/'+serie.idSerie" class="btn btn-primary w-100">Personajes</router-link>
         </div>
-      </div>
+      </div>  
     </div>
     
   </div>

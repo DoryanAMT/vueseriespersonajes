@@ -27,4 +27,30 @@ export default class ServiceSeries{
             })
         })
     }
+
+    getPersonajesSerie(idSerie){
+        return new Promise(function(resolve){
+            let personajes = [];
+            let request = "api/Series/PersonajesSerie/"+idSerie;
+            let url = Global.urlApiSeries + request;
+
+            axios.get(url).then(response => {
+                personajes = response.data;
+                resolve(personajes);
+            })
+
+        });
+    }
+
+    insertPersonajeSerie(personaje){
+        return new Promise(function(resolve){
+            let request = "api/Personajes"
+            let url = Global.urlApiPersonajes + request;
+
+            axios.post(url, personaje).then(response => {
+                resolve(response)
+            })
+        })
+
+    }
 }

@@ -4,11 +4,11 @@
     <div class="card" style="width: 18rem">
       <img :src="serie.imagen" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">{{serie.nombre}}</h5>
+        <h5 class="card-title">{{ serie.nombre }}</h5>
         <p class="card-text">
-          {{serie.puntuacion}}
+          IMDB: {{ serie.puntuacion }}
         </p>
-        <a href="#" class="btn btn-primary w-100">Go somewhere</a>
+        <router-link :to="'/personajesserie/'+serie.idSerie" class="btn btn-primary w-100">Personajes</router-link>
       </div>
     </div>
   </div>
@@ -26,13 +26,22 @@ export default {
     };
   },
   mounted() {
-    let idSerie = this.$route.params.id;
-    service.findSerie(idSerie).then((result) => {
-      this.serie = result;
-    });
+    this.loadSerie();
   },
-  watch(){
-    
-  }
+  watch: {
+    "$route.params.id"(nextVal, oldVal) {
+      if (oldVal != nextVal) {
+        this.loadSerie();
+      }
+    },
+  },
+  methods: {
+    loadSerie() {
+      let idSerie = this.$route.params.id;
+      service.findSerie(idSerie).then((result) => {
+        this.serie = result;
+      });
+    },
+  },
 };
 </script>
